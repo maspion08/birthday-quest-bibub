@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffe5f0" />
+    <title>Birthday Quest — For Bibub ♡</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap");
+      :root {
+        --pink: #ff8fbd;
+        --hot: #ed5b9d;
+        --lav: #b9a5ff;
+        --cream: #fff9f1;
+        --ink: #49364e;
+        --mint: #a8e6cf;
+        --yellow: #ffe08a;
+        --shadow: 0 12px 30px #9e66851c;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(135deg, #fff2f7, #f4efff 55%, #fff9e9);
+        color: var(--ink);
+        font-family: "Nunito", sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: 0;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #7658c9;
+        outline-offset: 3px;
+      }
+      .bg-sparkles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+        background-image:
+          radial-gradient(#ff9dc6 1.5px, transparent 1.5px),
+          radial-gradient(#b9a5ff 1.5px, transparent 1.5px);
+        background-size:
+          43px 43px,
+          67px 67px;
+        background-position:
+          0 0,
+          20px 15px;
+        opacity: 0.22;
+      }
+      .wrap {
+        width: min(960px, 92%);
+        margin: auto;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 17px 0;
+      }
+      .brand {
+        font-family: "Baloo 2";
+        font-weight: 800;
+        font-size: 1.15rem;
+        color: var(--hot);
+      }
+      .music-btn,
+      .tiny-btn {
+        background: #fff;
+        border: 2px solid #f5d7e5;
+        border-radius: 999px;
+        padding: 10px 15px;
+        color: var(--ink);
+        font-weight: 900;
+        box-shadow: 0 4px 0 #efd3e1;
+      }
+      .music-btn:active,
+      .tiny-btn:active,
+      .btn:active {
+        transform: translateY(3px);
+        box-shadow: none;
+      }
+      main {
+        padding: 20px 0 70px;
+      }
+      .panel {
+        background: #ffffffd9;
+        border: 2px solid #fff;
+        border-radius: 28px;
+        padding: clamp(20px, 5vw, 42px);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+        margin: 16px 0;
+      }
+      .hero {
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .eyebrow {
+        display: inline-block;
+        background: #fff0f6;
+        color: #d94e91;
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+      }
+      .hero h1 {
+        font: 800 clamp(2.5rem, 9vw, 5.3rem)/0.98 "Baloo 2";
+        margin: 18px 0 8px;
+        color: var(--hot);
+        text-shadow: 3px 4px 0 #ffe0ec;
+      }
+      .hero h1 span {
+        color: #987be7;
+      }
+      .subtitle {
+        font-size: 1.05rem;
+        line-height: 1.65;
+        max-width: 560px;
+        margin: 12px auto 22px;
+      }
+      .pixel-cake {
+        font-size: clamp(4rem, 13vw, 7rem);
+        filter: drop-shadow(0 8px 0 #f8dce9);
+        animation: bob 2.2s infinite ease-in-out;
+      }
+      @keyframes bob {
+        50% {
+          transform: translateY(-10px) rotate(3deg);
+        }
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: linear-gradient(135deg, var(--hot), #ff9fc5);
+        color: white;
+        padding: 13px 23px;
+        border-radius: 16px;
+        font-weight: 1000;
+        box-shadow: 0 5px 0 #d94e91;
+        transition: 0.15s;
+      }
+      .btn.secondary {
+        background: linear-gradient(135deg, #a38be9, #c2aaff);
+        box-shadow: 0 5px 0 #8971d0;
+      }
+      .btn.soft {
+        background: #fff;
+        color: var(--hot);
+        box-shadow: 0 5px 0 #f1d5e3;
+        border: 1px solid #f8d9e7;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .section-title {
+        font: 800 clamp(1.8rem, 5vw, 2.6rem)/1.1 "Baloo 2";
+        margin: 8px 0;
+        color: #795dbb;
+      }
+      .muted {
+        color: #8c7d91;
+        line-height: 1.65;
+      }
+      .progress-shell {
+        height: 12px;
+        background: #f5e7f0;
+        border-radius: 99px;
+        overflow: hidden;
+        margin: 14px 0 8px;
+      }
+      .progress {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #ff91bd, #aa96f5);
+        border-radius: 99px;
+        transition: width 0.4s;
+      }
+      .level-row {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+        margin: 18px 0;
+      }
+      .level-chip {
+        background: #f8f1ff;
+        border: 1px solid #e8defc;
+        padding: 8px 12px;
+        border-radius: 99px;
+        font-size: 0.8rem;
+        font-weight: 900;
+        color: #8972c8;
+      }
+      .level-chip.done {
+        background: #e6fff4;
+        border-color: #c7f0df;
+        color: #348d6d;
+      }
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 17px;
+        margin: 22px 0 16px;
+      }
+      .memory-card,
+      .gift-card {
+        position: relative;
+        background: #fff;
+        border: 2px solid #f7e5ee;
+        border-radius: 18px;
+        padding: 10px 10px 13px;
+        box-shadow: 0 7px 18px #b88aa51c;
+        transition:
+          transform 0.22s,
+          box-shadow 0.22s;
+        overflow: hidden;
+      }
+      .memory-card:nth-child(4n + 1) {
+        transform: rotate(-1.2deg);
+      }
+      .memory-card:nth-child(4n + 2) {
+        transform: rotate(1deg);
+      }
+      .memory-card:nth-child(4n + 3) {
+        transform: rotate(-0.5deg);
+      }
+      .memory-card:nth-child(4n) {
+        transform: rotate(1.3deg);
+      }
+      .memory-card:hover {
+        transform: translateY(-5px) rotate(0deg);
+        box-shadow: 0 13px 24px #b88aa533;
+        z-index: 1;
+      }
+      .memory-card:before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-3deg);
+        width: 48px;
+        height: 13px;
+        background: #ffe69a;
+        opacity: 0.78;
+        border-radius: 2px;
+        z-index: 1;
+      }
+      .memory-card img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        border-radius: 11px;
+        background: #f8eaf1;
+      }
+      .memory-card .placeholder {
+        aspect-ratio: 4/3;
+        border-radius: 11px;
+        background: linear-gradient(135deg, #ffe1ee, #e8e0ff);
+        display: grid;
+        place-items: center;
+        font-size: 2.6rem;
+      }
+      .memory-card .memory-number {
+        position: absolute;
+        right: 15px;
+        top: 17px;
+        background: #fff9;
+        border-radius: 99px;
+        padding: 3px 8px;
+        font-size: 0.68rem;
+        font-weight: 1000;
+        color: #a16caa;
+        z-index: 2;
+      }
+      .memory-card p {
+        margin: 10px 4px 3px;
+        font-weight: 1000;
+        font-family: "Baloo 2";
+        font-size: 1.02rem;
+        color: #805e9f;
+      }
+      .memory-card small {
+        display: block;
+        color: #93849a;
+        line-height: 1.4;
+        margin: 0 4px;
+      }
+      .gallery-note {
+        background: #fff6d9;
+        border: 1px dashed #f0d88d;
+        border-radius: 15px;
+        padding: 12px 15px;
+        color: #8a7041;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        margin: 16px 0 20px;
+      }
+      .quiz-box {
+        background: #fff8fc;
+        border: 2px dashed #f2b8d2;
+        border-radius: 22px;
+        padding: 20px;
+      }
+      .question-count {
+        font-size: 0.8rem;
+        color: #d45d96;
+        font-weight: 1000;
+      }
+      .question {
+        font: 800 1.35rem "Baloo 2";
+        margin: 10px 0 16px;
+      }
+      .answers {
+        display: grid;
+        gap: 10px;
+      }
+      .answer {
+        background: white;
+        border: 2px solid #f1dce8;
+        border-radius: 14px;
+        padding: 12px 14px;
+        text-align: left;
+        color: var(--ink);
+        font-weight: 800;
+      }
+      .answer:hover {
+        border-color: #e88bb7;
+        background: #fff5fa;
+      }
+      .answer.correct {
+        background: #e8fff4;
+        border-color: #75cba5;
+      }
+      .answer.wrong {
+        background: #fff0f0;
+        border-color: #f19a9a;
+      }
+      .feedback {
+        min-height: 30px;
+        font-weight: 900;
+        margin: 12px 0 0;
+      }
+      .mystery {
+        max-width: 300px;
+        margin: 20px auto;
+        text-align: center;
+      }
+      .gift-box {
+        font-size: 7rem;
+        display: block;
+        animation: wiggle 1.6s infinite;
+        filter: drop-shadow(0 10px 0 #f5dbe9);
+      }
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(-4deg);
+        }
+        50% {
+          transform: rotate(4deg);
+        }
+      }
+      .gift-reveal {
+        background: #fff4fa;
+        border-radius: 20px;
+        padding: 20px;
+        margin-top: 18px;
+        animation: pop 0.45s ease;
+      }
+      @keyframes pop {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .letter-wrap {
+        max-width: 560px;
+        margin: 20px auto;
+        text-align: center;
+      }
+      .envelope {
+        font-size: 6rem;
+        cursor: pointer;
+        display: inline-block;
+        transition: 0.3s;
+        filter: drop-shadow(0 8px 0 #f4dce8);
+      }
+      .envelope:hover {
+        transform: translateY(-7px) rotate(-4deg);
+      }
+      .letter {
+        background: #fffdf7;
+        border: 1px solid #f2dfc4;
+        border-radius: 8px;
+        padding: clamp(18px, 4vw, 30px);
+        text-align: left;
+        box-shadow: 0 8px 22px #806a481c;
+        line-height: 1.8;
+        white-space: pre-line;
+      }
+      .final {
+        text-align: center;
+        background: linear-gradient(135deg, #fff0f7, #f2edff);
+      }
+      .big-heart {
+        font-size: 4rem;
+        animation: beat 1s infinite;
+      }
+      @keyframes beat {
+        50% {
+          transform: scale(1.15);
+        }
+      }
+      footer {
+        text-align: center;
+        color: #9b8ba0;
+        font-size: 0.8rem;
+        padding: 20px;
+      }
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #49364e;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 99px;
+        z-index: 5;
+        box-shadow: var(--shadow);
+        font-weight: 800;
+      }
+      .confetti {
+        position: fixed;
+        top: -20px;
+        z-index: 10;
+        pointer-events: none;
+        animation: fall linear forwards;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0.2;
+        }
+      }
+      @media (max-width: 760px) {
+        .card-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 13px;
+        }
+        .memory-card {
+          padding: 9px 9px 11px;
+        }
+      }
+      @media (max-width: 600px) {
+        .topbar {
+          padding: 12px 0;
+        }
+        .brand {
+          font-size: 1rem;
+        }
+        .music-btn {
+          padding: 9px 11px;
+          font-size: 0.82rem;
+        }
+        .panel {
+          border-radius: 22px;
+        }
+        .hero {
+          padding: 26px 18px;
+        }
+        .btn {
+          width: 100%;
+        }
+        .level-row {
+          gap: 6px;
+        }
+        .level-chip {
+          font-size: 0.72rem;
+          padding: 7px 9px;
+        }
+      }
+      @media (max-width: 360px) {
+        .card-grid {
+          gap: 9px;
+        }
+        .memory-card p {
+          font-size: 0.92rem;
+        }
+        .memory-card small {
+          font-size: 0.72rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-sparkles"></div>
+    <div class="wrap">
+      <header class="topbar">
+        <div class="brand">♡ BIBUB QUEST</div>
+        <button class="music-btn" id="musicBtn" type="button">
+          ♫ Play music
+        </button>
+      </header>
+      <main>
+        <section class="panel hero" id="welcome">
+          <div class="eyebrow">A SPECIAL MISSION FOR ONE SPECIAL GIRL</div>
+          <div class="pixel-cake">🎂</div>
+          <h1>HAPPY BIRTHDAY,<br /><span>BIBUB!</span></h1>
+          <p class="subtitle">
+            Hi, Bibub! Ada sebuah misi rahasia yang dibuat khusus oleh Maspion.
+            Siap memulai petualangan kecil kita? ✨<br /><i
+              >Your birthday quest starts here.</i
+            >
+          </p>
+          <button class="btn" onclick="startQuest()">START MY QUEST ♡</button>
+          <p class="muted" style="font-size: 0.8rem; margin-top: 18px">
+            Psst... selesaikan semua level untuk membuka kejutan terakhir.
+          </p>
+        </section>
+
+        <section class="panel hidden" id="quest">
+          <div class="eyebrow">YOUR LITTLE ADVENTURE</div>
+          <h2 class="section-title">Quest Progress ✨</h2>
+          <p class="muted">
+            Satu langkah kecil, banyak alasan untuk tersenyum.
+          </p>
+          <div class="progress-shell">
+            <div class="progress" id="progress"></div>
+          </div>
+          <div class="level-row">
+            <span class="level-chip" id="chip1">01 Memories</span
+            ><span class="level-chip" id="chip2">02 Quiz</span
+            ><span class="level-chip" id="chip3">03 Mystery</span
+            ><span class="level-chip" id="chip4">04 Letter</span>
+          </div>
+          <div id="level1" class="level">
+            <h2 class="section-title">Level 01 — Memory Lane 📸</h2>
+            <p class="muted">
+              12 little snapshots, one big love story. Dua belas potongan kecil
+              dari cerita kita yang ingin Maspion simpan baik-baik. ♡
+            </p>
+            <div class="gallery-note">
+              ✂️ <b>Our scrapbook corner</b> ,setiap foto adalah satu halaman
+              kecil dari cerita Bibub &amp; Maspion. Tap, lihat, lalu senyum
+              sedikit, ya!
+            </div>
+            <div class="card-grid" id="gallery"></div>
+            <p class="muted" style="font-size: 0.83rem">
+              Masukkan 12 foto kalian ke folder <b>photos</b> dengan nama
+              <b>foto-1.jpg</b> sampai <b>foto-12.jpg</b>. Caption bisa diubah
+              di bagian CONFIG.
+            </p>
+            <button class="btn" onclick="completeLevel(1)">NEXT LEVEL →</button>
+          </div>
+          <div id="level2" class="level hidden">
+            <h2 class="section-title">Level 02 — Our Little Memories 🧠</h2>
+            <p class="muted">
+              Seberapa kuat ingatan Bibub tentang cerita kita? Let's see! Jawab
+              kuis kenangan ini.
+            </p>
+            <div class="quiz-box">
+              <div class="question-count" id="qCount">QUESTION 1</div>
+              <div class="question" id="question"></div>
+              <div class="answers" id="answers"></div>
+              <div class="feedback" id="feedback" aria-live="polite"></div>
+              <button
+                class="btn secondary hidden"
+                id="nextQuestion"
+                onclick="nextQ()"
+              >
+                NEXT QUESTION →
+              </button>
+            </div>
+            <button
+              class="btn soft"
+              style="margin-top: 15px"
+              onclick="completeLevel(2)"
+            >
+              SKIP QUIZ
+            </button>
+          </div>
+          <div id="level3" class="level hidden">
+            <h2 class="section-title">Level 03 — Mystery Gift 🎁</h2>
+            <p class="muted">
+              Bibub berhasil sampai sini! Tap kotaknya untuk membuka hadiah
+              rahasia.
+            </p>
+            <div class="mystery">
+              <button
+                class="gift-box"
+                id="giftBox"
+                onclick="openGift()"
+                aria-label="Buka kotak hadiah"
+              >
+                🎁
+              </button>
+              <div id="giftReveal" class="gift-reveal hidden">
+                <h3>CONGRATULATIONS, BIBUB! 🏆</h3>
+                <p id="giftText">
+                  Kamu mendapatkan satu sertifikat resmi: manusia paling
+                  menggemaskan di universe Maspion.
+                </p>
+                <p><b>Reward unlocked: Unlimited hugs & kisses ♡</b></p>
+              </div>
+            </div>
+            <button class="btn hidden" id="giftNext" onclick="completeLevel(3)">
+              CLAIM MY REWARD →
+            </button>
+          </div>
+          <div id="level4" class="level hidden">
+            <h2 class="section-title">Level 04 — A Letter For You 💌</h2>
+            <p class="muted">
+              The final level. Ada sesuatu yang ingin Maspion sampaikan. Tap
+              amplopnya, ya.
+            </p>
+            <div class="letter-wrap">
+              <button
+                class="envelope"
+                id="envelope"
+                onclick="openLetter()"
+                aria-label="Buka surat"
+              >
+                💌
+              </button>
+              <div class="letter hidden" id="letterText"></div>
+            </div>
+            <button class="btn hidden" id="finishBtn" onclick="finishQuest()">
+              FINISH THE QUEST ♡
+            </button>
+          </div>
+        </section>
+
+        <section class="panel final hidden" id="final">
+          <div class="eyebrow">QUEST COMPLETED</div>
+          <div class="big-heart">💗</div>
+          <h1
+            class="section-title"
+            style="font-size: clamp(2.2rem, 7vw, 3.6rem)"
+          >
+            YOU ARE MY<br />FAVORITE PERSON!
+          </h1>
+          <p class="subtitle">
+            Selamat ulang tahun, Bibub! Terima kasih sudah menjadi bagian dari
+            cerita Maspion selama ini. This is not the end of our story it's
+            just another beautiful chapter. ♡
+          </p>
+          <h2 style="color: #e45d9a; font-family: &quot;Baloo 2&quot;">
+            I love you, Bibub. Always. ♡
+          </h2>
+          <p class="muted">With all my love,<br /><b>Your Maspion</b></p>
+          <button class="btn secondary" onclick="celebrate()">
+            ONE MORE CELEBRATION ✨
+          </button>
+        </section>
+      </main>
+      <footer>Made with ♡ by Maspion, specially for Bibub.</footer>
+    </div>
+    <div id="toast" class="toast hidden" role="status"></div>
+    <audio id="bgMusic" loop preload="none"></audio>
+
+    <script>
+      // ===================== CONFIG: EDIT BAGIAN INI =====================
+      const CONFIG = {
+        // Masukkan nama file musik milikmu ke folder music, contoh: "our-song.mp3"
+        musicFile: "music/our-song.mp3",
+
+        // Ganti nama file foto sesuai file yang kamu masukkan ke folder photos.
+        // Jika belum ada, website akan menampilkan kartu ilustrasi otomatis.
+        memories: [
+          {
+            file: "photos/foto-1.jpg",
+            caption: "The beginning ♡",
+            note: "Satu awal dari banyak cerita indah.",
+          },
+          {
+            file: "photos/foto-2.jpg",
+            caption: "My favorite human",
+            note: "You make ordinary days feel special.",
+          },
+          {
+            file: "photos/foto-3.jpg",
+            caption: "Us being silly",
+            note: "Ketawa bareng, bahkan untuk hal receh.",
+          },
+          {
+            file: "photos/foto-4.jpg",
+            caption: "A little adventure",
+            note: "Satu tempat, sejuta cerita.",
+          },
+          {
+            file: "photos/foto-5.jpg",
+            caption: "Pretty little moments",
+            note: "Momen sederhana yang ingin diulang.",
+          },
+          {
+            file: "photos/foto-6.jpg",
+            caption: "My happy place",
+            note: "As long as it's with you. ♡",
+          },
+          {
+            file: "photos/foto-7.jpg",
+            caption: "Candid cutie",
+            note: "Senyum yang selalu Maspion suka.",
+          },
+          {
+            file: "photos/foto-8.jpg",
+            caption: "Date day!",
+            note: "Quality time with my favorite girl.",
+          },
+          {
+            file: "photos/foto-9.jpg",
+            caption: "Tiny chaos, big love",
+            note: "Kita memang paling seru kalau bersama.",
+          },
+          {
+            file: "photos/foto-10.jpg",
+            caption: "A memory to keep",
+            note: "Satu lagi halaman di cerita kita.",
+          },
+          {
+            file: "photos/foto-11.jpg",
+            caption: "Still my favorite",
+            note: "Then, now, and all the days ahead.",
+          },
+          {
+            file: "photos/foto-12.jpg",
+            caption: "To be continued...",
+            note: "Masih banyak foto dan cerita yang menunggu.",
+          },
+        ],
+
+        // GANTI pertanyaan dan pilihan di bawah dengan kenangan asli kalian.
+        // answer harus sama persis dengan salah satu isi options.
+        quiz: [
+          {
+            question: "Di mana kita pertama kali bertemu?",
+            options: [
+              "Di kampuss",
+              "Di acara temen",
+              "Lewat media sosial",
+              "Gatau lupa:(",
+            ],
+            answer: "Di kampuss",
+            correctMessage: "Yay! Bibub masih ingat cerita awal kita! ♡",
+            wrongMessage:
+              "Hehe, coba ingat-ingat lagi, Bibub. Maspion kasih satu kesempatan senyum dulu 😚",
+          },
+          {
+            question: "Apa nama kontak spesial Maspion untuk Bibub?",
+            options: ["Nopi jelekkk", "Beb", "Sayang", "Si Paling Comel"],
+            answer: "Si Paling Comel",
+            correctMessage: "Correct! You know your husbu so well!",
+            wrongMessage:
+              "Waduh, masa panggilan kesayangan lupa? Coba lagi ya!",
+          },
+          {
+            question: "Apa nama coffee shop tempat kita jadian?",
+            options: [
+              "Eksten Coffee",
+              "Bento Kopi",
+              "Reter Coffee",
+              "Kopi Randu",
+            ],
+            answer: "Reter Coffee",
+            correctMessage: "Betulll! tapi sekarang udah tutup:(",
+            wrongMessage:
+              "Jawabanmu lucu, tapi masih ada yang lebih tepat. Coba lagi!",
+          },
+        ],
+
+        // Edit surat ini agar lebih personal. Tambahkan kejadian atau ucapan dari hatimu.
+        letter: `# Happy Birthday, Bibub! ♡
+
+Selamat ulang tahun, sayang!
+
+Hari ini adalah tentang kamu, tentang seseorang yang kehadirannya telah memberikan begitu banyak warna dalam perjalanan hidup Maspion.
+
+Sejak 2022, kita melewati begitu banyak cerita bersama. Ada tawa, canda, cerita-cerita kecil, hari-hari menyenangkan, bahkan mungkin beberapa hari yang tidak selalu berjalan sesuai harapan. Tanpa terasa, sekarang kita sedang melangkah menuju tahun kelima perjalanan ini.
+
+Kalau dipikir-pikir, banyak sekali hal yang sudah kita lalui. Dan dari sekian banyak hal yang berubah seiring waktu, satu hal yang tetap ingin Maspion jaga adalah kesempatan untuk terus mengenal kamu, tumbuh bersama kamu, dan menciptakan lebih banyak cerita yang bisa kita kenang suatu hari nanti.
+
+Di usia barumu ini, Maspion berharap semoga dunia selalu punya banyak alasan untuk membuatmu tersenyum. Semoga kamu selalu diberi kesehatan, hati yang tenang, langkah yang dimudahkan, dan keberanian untuk meraih semua impianmu.
+
+I hope you never lose the little things that make you happy. Tetaplah menjadi Bibub yang ceria, lucu, penuh cerita, dan punya cara tersendiri untuk membuat hari-hari terasa lebih menyenangkan.
+
+Jangan terlalu keras sama dirimu sendiri, ya. Kamu ngga harus selalu kuat, ngga harus selalu sempurna, dan ngga perlu terburu-buru dalam menjalani semuanya. Nikmati setiap prosesnya. Maspion selalu berharap yang terbaik untuk setiap langkah yang kamu ambil.
+
+And one more thing...
+
+Thank you for being part of my story. I hope we still have countless birthdays to celebrate, silly moments to laugh about, places to explore, and beautiful memories to create together.
+
+Happy birthday, my favorite person.
+
+May this new chapter be as wonderful as the person you are.
+
+With all my love,  
+Your Maspion ♡`,
+
+        giftMessage:
+          "Kamu mendapatkan sertifikat resmi: manusia paling menggemaskan di universe Maspion. Berlaku selamanya, tidak bisa dibatalkan. 😚",
+      };
+      // =================== END CONFIG ===================
+
+      let currentLevel = 1,
+        qIndex = 0,
+        answered = false,
+        giftOpened = false,
+        letterOpened = false;
+      const $ = (id) => document.getElementById(id);
+      const audio = $("bgMusic");
+      audio.src = CONFIG.musicFile;
+
+      function startQuest() {
+        $("welcome").classList.add("hidden");
+        $("quest").classList.remove("hidden");
+        showLevel(1);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function showLevel(n) {
+        currentLevel = n;
+        document
+          .querySelectorAll(".level")
+          .forEach((el) => el.classList.add("hidden"));
+        $("level" + n).classList.remove("hidden");
+        updateProgress();
+        if (n === 2) renderQuestion();
+      }
+      function updateProgress() {
+        $("progress").style.width = ((currentLevel - 1) / 4) * 100 + "%";
+        for (let i = 1; i <= 4; i++)
+          $("chip" + i).classList.toggle("done", i < currentLevel);
+      }
+      function completeLevel(n) {
+        $("chip" + n).classList.add("done");
+        if (n < 4) showLevel(n + 1);
+        else finishQuest();
+      }
+      function buildGallery() {
+        $("gallery").innerHTML = "";
+        CONFIG.memories.slice(0, 12).forEach((m, i) => {
+          const card = document.createElement("div");
+          card.className = "memory-card";
+          const number = document.createElement("span");
+          number.className = "memory-number";
+          number.textContent = String(i + 1).padStart(2, "0");
+          const img = document.createElement("img");
+          img.src = m.file;
+          img.alt = m.caption;
+          img.loading = "lazy";
+          img.onerror = () => {
+            const ph = document.createElement("div");
+            ph.className = "placeholder";
+            ph.textContent = ["📸", "💗", "🌷", "✨", "🧸", "🍓"][i % 6];
+            img.replaceWith(ph);
+          };
+          const p = document.createElement("p");
+          p.textContent = m.caption;
+          const small = document.createElement("small");
+          small.textContent = m.note;
+          card.append(number, img, p, small);
+          $("gallery").append(card);
+        });
+      }
+      function renderQuestion() {
+        const q = CONFIG.quiz[qIndex];
+        answered = false;
+        $("qCount").textContent =
+          `QUESTION ${qIndex + 1} / ${CONFIG.quiz.length}`;
+        $("question").textContent = q.question;
+        $("answers").innerHTML = "";
+        $("feedback").textContent = "";
+        $("nextQuestion").classList.add("hidden");
+        q.options.forEach((opt) => {
+          const b = document.createElement("button");
+          b.className = "answer";
+          b.textContent = opt;
+          b.onclick = () => checkAnswer(b, opt, q);
+          $("answers").append(b);
+        });
+      }
+      function checkAnswer(btn, opt, q) {
+        if (answered) return;
+        answered = true;
+        document
+          .querySelectorAll(".answer")
+          .forEach((b) => (b.disabled = true));
+        if (opt === q.answer) {
+          btn.classList.add("correct");
+          $("feedback").textContent = q.correctMessage || "Benar! ♡";
+        } else {
+          btn.classList.add("wrong");
+          $("feedback").textContent =
+            q.wrongMessage || "Belum tepat, tapi tetap cute! ♡";
+          document.querySelectorAll(".answer").forEach((b) => {
+            if (b.textContent === q.answer) b.classList.add("correct");
+          });
+        }
+        $("nextQuestion").classList.remove("hidden");
+        $("nextQuestion").textContent =
+          qIndex === CONFIG.quiz.length - 1
+            ? "FINISH QUIZ →"
+            : "NEXT QUESTION →";
+      }
+      function nextQ() {
+        if (qIndex < CONFIG.quiz.length - 1) {
+          qIndex++;
+          renderQuestion();
+        } else {
+          toast("Quiz completed! Nice try, Bibub ♡");
+          completeLevel(2);
+        }
+      }
+      function openGift() {
+        if (giftOpened) return;
+        giftOpened = true;
+        $("giftBox").textContent = "🎉";
+        $("giftReveal").classList.remove("hidden");
+        $("giftText").textContent = CONFIG.giftMessage;
+        $("giftNext").classList.remove("hidden");
+        confetti();
+      }
+      function openLetter() {
+        if (letterOpened) return;
+        letterOpened = true;
+        $("envelope").textContent = "💌✨";
+        $("letterText").textContent = CONFIG.letter;
+        $("letterText").classList.remove("hidden");
+        $("finishBtn").classList.remove("hidden");
+      }
+      function finishQuest() {
+        $("quest").classList.add("hidden");
+        $("final").classList.remove("hidden");
+        $("progress").style.width = "100%";
+        confetti();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function celebrate() {
+        confetti();
+        toast("Sending unlimited virtual hugs to Bibub! ♡");
+      }
+      function confetti() {
+        const pieces = ["💗", "✨", "🌸", "⭐", "🎉", "💕"];
+        for (let i = 0; i < 34; i++) {
+          const el = document.createElement("div");
+          el.className = "confetti";
+          el.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+          el.style.left = Math.random() * 100 + "vw";
+          el.style.animationDuration = 2 + Math.random() * 3 + "s";
+          el.style.fontSize = 14 + Math.random() * 18 + "px";
+          document.body.append(el);
+          setTimeout(() => el.remove(), 5200);
+        }
+      }
+      let toastTimer;
+      function toast(msg) {
+        $("toast").textContent = msg;
+        $("toast").classList.remove("hidden");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => $("toast").classList.add("hidden"), 2600);
+      }
+      $("musicBtn").addEventListener("click", async () => {
+        if (audio.paused) {
+          try {
+            await audio.play();
+            $("musicBtn").textContent = "♫ Pause music";
+          } catch (e) {
+            toast("Tambahkan file musik ke folder music terlebih dahulu ya!");
+          }
+        } else {
+          audio.pause();
+          $("musicBtn").textContent = "♫ Play music";
+        }
+      });
+      buildGallery();
+    </script>
+  </body>
+</html>

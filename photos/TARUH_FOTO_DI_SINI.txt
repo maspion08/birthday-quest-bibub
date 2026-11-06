@@ -1,0 +1,3 @@
+Taruh 12 foto kalian di folder ini dengan nama:
+foto-1.jpg sampai foto-12.jpg
+Jika format foto PNG, ubah ekstensi pada CONFIG di index.html.
